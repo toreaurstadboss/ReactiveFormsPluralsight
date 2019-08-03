@@ -1,5 +1,9 @@
 # Demo-Start: These are the starter files for the Angular Reactive Forms demo form.
 
+This repo follows along the Reactive Forms repo on Pluralsight
+
+- toreaurstadboss
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
 ## Development server
