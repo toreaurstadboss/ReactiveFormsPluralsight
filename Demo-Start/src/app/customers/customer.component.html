@@ -105,18 +105,9 @@
             id="emailId"
             type="email"
             placeholder="email"
-            [ngClass]="{
-              'is-invalid':
-                customerForm.get('emailGroup').errors ||
-                (customerForm.get('emailGroup.email').touched ||
-                  customerForm.get('emailGroup.email').dirty) &&
-                !customerForm.get('emailGroup.email').valid
-            }"
-          />
+            [ngClass]="{'is-invalid': emailMessage}" />
           <span class="invalid-feedback">
-            <span *ngIf="customerForm.get('emailGroup.email').errors?.required">
-              Please enter your email
-            </span>
+             {{ emailMessage }}
           </span>
         </div>
       </div>
@@ -131,21 +122,9 @@
             id="confirmemailId"
             type="email"
             placeholder="Confirm email"
-            [ngClass]="{
-              'is-invalid':
-                customerForm.get('emailGroup').errors ||
-                (customerForm.get('emailGroup.confirmemail').touched ||
-                  customerForm.get('emailGroup.confirmemail').dirty) &&
-                !customerForm.get('emailGroup.confirmemail').valid
-            }"
-          />
+            [ngClass]="{'is-invalid': emailMessage}" />
           <span class="invalid-feedback">
-            <span *ngIf="customerForm.get('emailGroup.confirmemail').errors?.required">
-              Please confirm your email
-            </span>
-            <span *ngIf="customerForm.get('emailGroup').errors?.mismatchEmail">
-             The confirmation does not match the email address.
-            </span>
+            {{ emailMessage }}
           </span>
         </div>
       </div>
@@ -158,12 +137,12 @@
         <div class="cold-md-8">
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="radio" value="email" (click)="setNotification('email')" formControlName="notification">Email
+              <input class="form-check-input" type="radio" value="email" formControlName="notification">Email
             </label>
           </div>
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="radio" text="text" (click)="setNotification('text')" formControlName="notification">Text
+              <input class="form-check-input" type="radio" value="text" formControlName="notification">Text
 
             </label>
           </div>
