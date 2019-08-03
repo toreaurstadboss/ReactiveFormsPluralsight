@@ -64,7 +64,13 @@ export class CustomerComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         confirmemail: ['', [Validators.required]],
       }, {validator: emailMatcher}),
-      sendCatalog: true
+      sendCatalog: true,
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      city: '',
+      state: '',
+      zip: ''
     });
 
     this.customerForm.get('notification').valueChanges.subscribe(value =>
