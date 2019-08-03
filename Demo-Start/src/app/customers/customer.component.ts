@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { Customer } from './customer';
 
@@ -65,12 +65,7 @@ export class CustomerComponent implements OnInit {
         confirmemail: ['', [Validators.required]],
       }, {validator: emailMatcher}),
       sendCatalog: true,
-      addressType: 'home',
-      street1: '',
-      street2: '',
-      city: '',
-      state: '',
-      zip: ''
+      addresses: this.fb.array([ this.buildAddress() ])
     });
 
     this.customerForm.get('notification').valueChanges.subscribe(value =>
@@ -78,6 +73,14 @@ export class CustomerComponent implements OnInit {
 
     const emailControl = this.customerForm.get('emailGroup.email');
     emailControl.valueChanges.pipe(debounceTime(1000)).subscribe((value => this.setMessage(emailControl)))
+  }
+
+  addAddress(): void {
+    this.addresses.push(this.buildAddress());
+  }
+
+  get addresses(): FormArray {
+    return <FormArray>this.customerForm.get('addresses');
   }
 
   setMessage(c: AbstractControl): void {
@@ -109,6 +112,17 @@ export class CustomerComponent implements OnInit {
       firstName: 'Jack',
       lastName: 'Harkness',
       sendCatalog: false
+    });
+  }
+
+  buildAddress(): FormGroup  {
+    return this.fb.group({
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      city: '',
+      state: '',
+      zip: ''
     });
   }
 
